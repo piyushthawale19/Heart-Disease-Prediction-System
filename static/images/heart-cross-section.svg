@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 320" width="280" height="320">
+  <defs>
+    <linearGradient id="chamberGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4867A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B85C6E;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="wallGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4A6B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6B3A5B;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bloodGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#DC143C;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#8B0000;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Outer heart wall -->
+  <path d="M140,300 Q100,260 100,220 Q100,180 85,160 Q70,140 70,110 Q70,80 100,60 Q130,40 140,80 Q150,40 180,60 Q210,80 210,110 Q210,140 195,160 Q180,180 180,220 Q180,260 140,300 Z" 
+        fill="url(#wallGradient)" 
+        stroke="#5A2A4B" 
+        stroke-width="2"/>
+  
+  <!-- Right atrium chamber -->
+  <ellipse cx="170" cy="120" rx="18" ry="25" fill="url(#chamberGradient)" stroke="#A0566C" stroke-width="1"/>
+  
+  <!-- Left atrium chamber -->
+  <ellipse cx="110" cy="120" rx="18" ry="25" fill="url(#chamberGradient)" stroke="#A0566C" stroke-width="1"/>
+  
+  <!-- Right ventricle chamber -->
+  <path d="M160,155 Q175,165 175,200 Q175,230 160,250 Q145,260 145,230 Q145,200 160,155" 
+        fill="url(#chamberGradient)" stroke="#A0566C" stroke-width="1"/>
+  
+  <!-- Left ventricle chamber -->
+  <path d="M120,155 Q105,165 105,200 Q105,230 120,250 Q135,260 135,230 Q135,200 120,155" 
+        fill="url(#chamberGradient)" stroke="#A0566C" stroke-width="1"/>
+  
+  <!-- Septum -->
+  <line x1="140" y1="100" x2="140" y2="260" stroke="#6B3A5B" stroke-width="4"/>
+  
+  <!-- Blood flow in chambers -->
+  <ellipse cx="170" cy="120" rx="12" ry="18" fill="url(#bloodGradient)" opacity="0.6"/>
+  <ellipse cx="110" cy="120" rx="12" ry="18" fill="url(#bloodGradient)" opacity="0.6"/>
+  <path d="M160,160 Q170,170 170,195 Q170,220 160,240 Q150,250 150,220 Q150,195 160,160" 
+        fill="url(#bloodGradient)" opacity="0.6"/>
+  <path d="M120,160 Q110,170 110,195 Q110,220 120,240 Q130,250 130,220 Q130,195 120,160" 
+        fill="url(#bloodGradient)" opacity="0.6"/>
+  
+  <!-- Major vessels -->
+  <rect x="125" y="40" width="8" height="25" fill="#DC143C" rx="4"/> <!-- Aorta -->
+  <rect x="147" y="45" width="6" height="20" fill="#DC143C" rx="3"/> <!-- Pulmonary artery -->
+  
+  <!-- Valves -->
+  <g stroke="#FFD700" stroke-width="2" fill="none">
+    <!-- Tricuspid valve -->
+    <path d="M155,145 Q165,150 175,145"/>
+    <path d="M160,140 Q170,145 175,140"/>
+    
+    <!-- Mitral valve -->
+    <path d="M125,145 Q115,150 105,145"/>
+    <path d="M120,140 Q110,145 105,140"/>
+    
+    <!-- Pulmonary valve -->
+    <circle cx="150" cy="65" r="3" fill="#FFD700" stroke="#FFA500"/>
+    
+    <!-- Aortic valve -->
+    <circle cx="129" cy="65" r="3" fill="#FFD700" stroke="#FFA500"/>
+  </g>
+  
+  <!-- Coronary arteries detail -->
+  <path d="M110,100 Q130,90 150,100 Q170,110 185,130" 
+        stroke="#FF4444" 
+        stroke-width="2.5" 
+        fill="none" 
+        stroke-linecap="round"/>
+  <path d="M125,140 Q140,130 155,140 Q165,150 170,165" 
+        stroke="#FF4444" 
+        stroke-width="2" 
+        fill="none" 
+        stroke-linecap="round"/>
+  
+  <!-- Labels background -->
+  <rect x="10" y="280" width="260" height="35" fill="rgba(255,255,255,0.9)" stroke="#ddd" rx="5"/>
+  
+  <!-- Labels -->
+  <text x="20" y="295" font-family="Arial, sans-serif" font-size="10" fill="#333">
+    <tspan x="20" dy="0">RA: Right Atrium</tspan>
+    <tspan x="120" dy="0">LA: Left Atrium</tspan>
+  </text>
+  <text x="20" y="308" font-family="Arial, sans-serif" font-size="10" fill="#333">
+    <tspan x="20" dy="0">RV: Right Ventricle</tspan>
+    <tspan x="120" dy="0">LV: Left Ventricle</tspan>
+  </text>
+</svg>

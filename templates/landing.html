@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Smart Heart Disease Prediction System{% endblock %}
+
+{% block main_class %}landing-main{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center min-vh-100">
+            <div class="col-lg-6">
+                <div class="hero-content">
+                    <h1 class="display-4 fw-bold text-medical-primary mb-4">
+                        <i class="fas fa-heartbeat text-danger me-3"></i>
+                        Smart Heart Disease Prediction System
+                    </h1>
+                    <p class="lead text-muted mb-4">
+                        Advanced AI-powered assessment to evaluate your heart disease risk factors. 
+                        Get personalized insights, health recommendations, and dietary guidance based on your health profile.
+                    </p>
+                    
+                    <div class="features-list mb-4">
+                        <div class="feature-item d-flex align-items-center mb-3">
+                            <div class="feature-icon">
+                                <i class="fas fa-brain text-primary"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-1">AI-Powered Analysis</h6>
+                                <p class="text-muted small mb-0">Machine learning algorithms trained on comprehensive medical data</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item d-flex align-items-center mb-3">
+                            <div class="feature-icon">
+                                <i class="fas fa-user-md text-success"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-1">Personalized Recommendations</h6>
+                                <p class="text-muted small mb-0">Tailored health tips and diet plans based on your specific risk factors</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item d-flex align-items-center mb-3">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt text-warning"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-1">Comprehensive Assessment</h6>
+                                <p class="text-muted small mb-0">Evaluates multiple heart conditions and risk factors</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cta-buttons">
+                        <a href="{{ url_for('input_form') }}" class="btn btn-medical-primary btn-lg me-3">
+                            <i class="fas fa-play me-2"></i>
+                            Start Diagnosis
+                        </a>
+                        <button class="btn btn-outline-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#infoModal">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="hero-image text-center">
+                    <div class="medical-illustration">
+                        <i class="fas fa-heart text-danger" style="font-size: 15rem; opacity: 0.1;"></i>
+                        <div class="pulse-animation"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Statistics Section -->
+<section class="stats-section py-5 bg-light">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3 mb-4">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users text-primary"></i>
+                    </div>
+                    <h3 class="stat-number">10,000+</h3>
+                    <p class="stat-label">Assessments Completed</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line text-success"></i>
+                    </div>
+                    <h3 class="stat-number">95%</h3>
+                    <p class="stat-label">Accuracy Rate</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-heart text-danger"></i>
+                    </div>
+                    <h3 class="stat-number">6</h3>
+                    <p class="stat-label">Conditions Analyzed</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock text-warning"></i>
+                    </div>
+                    <h3 class="stat-number">5 min</h3>
+                    <p class="stat-label">Assessment Time</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Information Modal -->
+<div class="modal fade" id="infoModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-info-circle me-2"></i>
+                    About Heart Disease Prediction
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>What We Analyze:</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Coronary Artery Disease</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Heart Arrhythmia</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Heart Failure</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Valve Disease</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Cardiomyopathy</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Hypertension</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Key Features:</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-primary me-2"></i>Optional form fields</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Instant risk assessment</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Personalized recommendations</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Diet and lifestyle tips</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Doctor consultation advice</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="alert alert-warning mt-3">
+                    <strong>Important:</strong> This tool is designed to supplement, not replace, professional medical advice. 
+                    Always consult with healthcare providers for medical decisions and treatment.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a href="{{ url_for('input_form') }}" class="btn btn-medical-primary">Start Assessment</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

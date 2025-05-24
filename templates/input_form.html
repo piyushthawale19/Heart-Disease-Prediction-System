@@ -1,0 +1,363 @@
+{% extends "base.html" %}
+
+{% block title %}Health Assessment - Smart Heart Disease Prediction System{% endblock %}
+
+{% block main_class %}form-main pt-5{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Header -->
+            <div class="card shadow-lg border-0 mb-4">
+                <div class="card-header bg-medical-primary text-white text-center py-4">
+                    <h2 class="mb-0">
+                        <i class="fas fa-clipboard-list me-3"></i>
+                        Heart Health Assessment
+                    </h2>
+                    <p class="mb-0 mt-2">Please fill in the information you know. All fields are optional.</p>
+                </div>
+            </div>
+
+            <!-- Progress Indicator -->
+            <div class="progress mb-4" style="height: 8px;">
+                <div id="form-progress" class="progress-bar bg-success" role="progressbar" style="width: 0%"></div>
+            </div>
+
+            <!-- Form -->
+            <form id="healthForm" method="POST" action="{{ url_for('predict') }}">
+                <!-- Basic Information -->
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">
+                            <i class="fas fa-user text-primary me-2"></i>
+                            Basic Information
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="age" class="form-label">Age (years)</label>
+                                <input type="number" class="form-control" id="age" name="age" min="1" max="120" placeholder="e.g., 45">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="sex" class="form-label">Sex</label>
+                                <select class="form-select" id="sex" name="sex">
+                                    <option value="">Select...</option>
+                                    <option value="1">Male</option>
+                                    <option value="0">Female</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="bmi" class="form-label">BMI (kg/m²)</label>
+                                <input type="number" class="form-control" id="bmi" name="bmi" min="10" max="50" step="0.1" placeholder="e.g., 25.5">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cardiovascular Measurements -->
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">
+                            <i class="fas fa-heartbeat text-danger me-2"></i>
+                            Cardiovascular Measurements
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="trestbps" class="form-label">Resting Blood Pressure (mmHg)</label>
+                                <input type="number" class="form-control" id="trestbps" name="trestbps" min="80" max="200" placeholder="e.g., 120">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="chol" class="form-label">Cholesterol (mg/dl)</label>
+                                <input type="number" class="form-control" id="chol" name="chol" min="100" max="500" placeholder="e.g., 200">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="thalach" class="form-label">Max Heart Rate Achieved</label>
+                                <input type="number" class="form-control" id="thalach" name="thalach" min="60" max="220" placeholder="e.g., 150">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="oldpeak" class="form-label">ST Depression (oldpeak)</label>
+                                <input type="number" class="form-control" id="oldpeak" name="oldpeak" min="0" max="10" step="0.1" placeholder="e.g., 1.0">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="heart_rate_variability" class="form-label">Heart Rate Variability</label>
+                                <input type="number" class="form-control" id="heart_rate_variability" name="heart_rate_variability" min="0" max="100" step="0.1" placeholder="e.g., 45.5">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="aortic_size" class="form-label">Aortic Size (mm)</label>
+                                <input type="number" class="form-control" id="aortic_size" name="aortic_size" min="20" max="60" step="0.1" placeholder="e.g., 35.0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clinical Parameters -->
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">
+                            <i class="fas fa-stethoscope text-success me-2"></i>
+                            Clinical Parameters
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="cp" class="form-label">Chest Pain Type</label>
+                                <select class="form-select" id="cp" name="cp">
+                                    <option value="">Select...</option>
+                                    <option value="0">Typical Angina</option>
+                                    <option value="1">Atypical Angina</option>
+                                    <option value="2">Non-Anginal Pain</option>
+                                    <option value="3">Asymptomatic</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="fbs" class="form-label">Fasting Blood Sugar > 120 mg/dl</label>
+                                <select class="form-select" id="fbs" name="fbs">
+                                    <option value="">Select...</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="restecg" class="form-label">Resting ECG Results</label>
+                                <select class="form-select" id="restecg" name="restecg">
+                                    <option value="">Select...</option>
+                                    <option value="0">Normal</option>
+                                    <option value="1">ST-T Wave Abnormality</option>
+                                    <option value="2">Left Ventricular Hypertrophy</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="exang" class="form-label">Exercise Induced Angina</label>
+                                <select class="form-select" id="exang" name="exang">
+                                    <option value="">Select...</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="slope" class="form-label">ST Segment Slope</label>
+                                <select class="form-select" id="slope" name="slope">
+                                    <option value="">Select...</option>
+                                    <option value="0">Upsloping</option>
+                                    <option value="1">Flat</option>
+                                    <option value="2">Downsloping</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="ca" class="form-label">Number of Major Vessels (0-4)</label>
+                                <select class="form-select" id="ca" name="ca">
+                                    <option value="">Select...</option>
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="thal" class="form-label">Thalassemia</label>
+                                <select class="form-select" id="thal" name="thal">
+                                    <option value="">Select...</option>
+                                    <option value="0">Normal</option>
+                                    <option value="1">Fixed Defect</option>
+                                    <option value="2">Reversible Defect</option>
+                                    <option value="3">Not Described</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="valve_noise" class="form-label">Heart Valve Noise</label>
+                                <select class="form-select" id="valve_noise" name="valve_noise">
+                                    <option value="">Select...</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="congenital_defect" class="form-label">Congenital Heart Defect</label>
+                                <select class="form-select" id="congenital_defect" name="congenital_defect">
+                                    <option value="">Select...</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lifestyle Factors -->
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">
+                            <i class="fas fa-running text-warning me-2"></i>
+                            Lifestyle Factors
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="smoking" class="form-label">Smoking Status</label>
+                                <select class="form-select" id="smoking" name="smoking">
+                                    <option value="">Select...</option>
+                                    <option value="1">Current Smoker</option>
+                                    <option value="0">Non-Smoker</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="alcohol_intake" class="form-label">Alcohol Intake</label>
+                                <select class="form-select" id="alcohol_intake" name="alcohol_intake">
+                                    <option value="">Select...</option>
+                                    <option value="0">None</option>
+                                    <option value="1">Moderate</option>
+                                    <option value="2">Heavy</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="physical_activity" class="form-label">Physical Activity Level (1-10)</label>
+                                <input type="range" class="form-range" id="physical_activity" name="physical_activity" min="0" max="10" step="1">
+                                <div class="d-flex justify-content-between">
+                                    <small>Sedentary</small>
+                                    <small>Very Active</small>
+                                </div>
+                                <div class="text-center mt-1">
+                                    <span id="activity-value" class="badge bg-secondary">5</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="stress_level" class="form-label">Stress Level (1-10)</label>
+                                <input type="range" class="form-range" id="stress_level" name="stress_level" min="1" max="10" step="1" value="5">
+                                <div class="d-flex justify-content-between">
+                                    <small>Low Stress</small>
+                                    <small>High Stress</small>
+                                </div>
+                                <div class="text-center mt-1">
+                                    <span id="stress-value" class="badge bg-secondary">5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medical History -->
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">
+                            <i class="fas fa-history text-info me-2"></i>
+                            Medical History
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="family_history" class="form-label">Family History of Heart Disease</label>
+                                <select class="form-select" id="family_history" name="family_history">
+                                    <option value="">Select...</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="diabetes" class="form-label">Diabetes</label>
+                                <select class="form-select" id="diabetes" name="diabetes">
+                                    <option value="">Select...</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="infection_history" class="form-label">History of Heart Infections</label>
+                                <select class="form-select" id="infection_history" name="infection_history">
+                                    <option value="">Select...</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center mb-5">
+                    <button type="submit" class="btn btn-medical-primary btn-lg px-5">
+                        <i class="fas fa-chart-line me-2"></i>
+                        Analyze Heart Health
+                    </button>
+                    <div class="mt-3">
+                        <small class="text-muted">
+                            <i class="fas fa-lock me-1"></i>
+                            Your data is processed securely and not stored permanently
+                        </small>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Update progress bar based on filled fields
+    function updateProgress() {
+        const form = document.getElementById('healthForm');
+        const inputs = form.querySelectorAll('input, select');
+        let filled = 0;
+        let total = inputs.length;
+        
+        inputs.forEach(input => {
+            if (input.value && input.value.trim() !== '') {
+                filled++;
+            }
+        });
+        
+        const percentage = (filled / total) * 100;
+        document.getElementById('form-progress').style.width = percentage + '%';
+    }
+    
+    // Update range slider values
+    function updateSliderValues() {
+        const activitySlider = document.getElementById('physical_activity');
+        const stressSlider = document.getElementById('stress_level');
+        
+        document.getElementById('activity-value').textContent = activitySlider.value;
+        document.getElementById('stress-value').textContent = stressSlider.value;
+        
+        activitySlider.addEventListener('input', function() {
+            document.getElementById('activity-value').textContent = this.value;
+            updateProgress();
+        });
+        
+        stressSlider.addEventListener('input', function() {
+            document.getElementById('stress-value').textContent = this.value;
+            updateProgress();
+        });
+    }
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+        updateSliderValues();
+        updateProgress();
+        
+        // Add event listeners to all form inputs
+        const form = document.getElementById('healthForm');
+        const inputs = form.querySelectorAll('input, select');
+        
+        inputs.forEach(input => {
+            input.addEventListener('change', updateProgress);
+            input.addEventListener('input', updateProgress);
+        });
+    });
+</script>
+{% endblock %}

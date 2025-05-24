@@ -1,0 +1,267 @@
+{% extends "base.html" %}
+
+{% block title %}Results - Smart Heart Disease Prediction System{% endblock %}
+
+{% block main_class %}results-main pt-5{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Header -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-10">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-gradient text-white text-center py-4" style="background: linear-gradient(135deg, #2c3e50, #3498db);">
+                    <h2 class="mb-0">
+                        <i class="fas fa-chart-line me-3"></i>
+                        Heart Health Assessment Results
+                    </h2>
+                    <p class="mb-0 mt-2">Based on your provided health information</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if results %}
+        <!-- Risk Summary -->
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10">
+                <div class="alert alert-info">
+                    <h5><i class="fas fa-info-circle me-2"></i>Assessment Summary</h5>
+                    <p class="mb-0">We analyzed {{ results|length }} potential heart condition(s) that showed moderate to high risk levels based on your health profile. Please review the detailed results below and consult with healthcare professionals for proper medical evaluation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Cards -->
+        {% for result in results %}
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10">
+                <div class="card shadow border-0">
+                    <div class="card-header bg-light">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h4 class="mb-0 text-medical-primary">
+                                    <i class="fas fa-heartbeat me-2"></i>
+                                    {{ result.disease_info.name }}
+                                </h4>
+                            </div>
+                            <div class="col-md-4 text-md-end">
+                                <span class="badge badge-risk-{{ result.risk_level.lower() }} fs-6">
+                                    {{ result.risk_level }} Risk ({{ result.probability }}%)
+                                </span>
+                                <div class="mt-1">
+                                    <small class="text-muted">Confidence: {{ result.confidence }}%</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-body">
+                        <!-- Disease Description -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <h6><i class="fas fa-file-medical text-primary me-2"></i>Description</h6>
+                                <p class="text-muted">{{ result.disease_info.description }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Symptoms, Causes, Complications -->
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <h6><i class="fas fa-exclamation-triangle text-warning me-2"></i>Symptoms</h6>
+                                <ul class="list-unstyled">
+                                    {% for symptom in result.disease_info.symptoms[:4] %}
+                                    <li><i class="fas fa-dot-circle text-warning me-2" style="font-size: 0.6rem;"></i>{{ symptom }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <h6><i class="fas fa-search text-info me-2"></i>Common Causes</h6>
+                                <ul class="list-unstyled">
+                                    {% for cause in result.disease_info.causes[:4] %}
+                                    <li><i class="fas fa-dot-circle text-info me-2" style="font-size: 0.6rem;"></i>{{ cause }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <h6><i class="fas fa-exclamation-circle text-danger me-2"></i>Potential Complications</h6>
+                                <ul class="list-unstyled">
+                                    {% for complication in result.disease_info.complications[:4] %}
+                                    <li><i class="fas fa-dot-circle text-danger me-2" style="font-size: 0.6rem;"></i>{{ complication }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Doctor Consultation -->
+                        <div class="alert alert-warning mb-4">
+                            <h6><i class="fas fa-user-md me-2"></i>Doctor Consultation Recommendation</h6>
+                            <p class="mb-0">
+                                {% if result.risk_level == 'High' %}
+                                <strong>Urgent:</strong> Schedule an appointment with a cardiologist as soon as possible. Your risk factors indicate a need for immediate professional evaluation and potential treatment.
+                                {% elif result.risk_level == 'Moderate' %}
+                                <strong>Recommended:</strong> Consult with your primary care physician within the next 2-4 weeks. Discuss your risk factors and consider referral to a cardiologist if needed.
+                                {% else %}
+                                <strong>Routine:</strong> Discuss these results during your next routine check-up. Maintain regular health screenings as recommended by your doctor.
+                                {% endif %}
+                            </p>
+                        </div>
+
+                        <!-- Health Tips -->
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <h6><i class="fas fa-heart text-success me-2"></i>Personalized Health Tips</h6>
+                                <ul class="list-unstyled">
+                                    {% for tip in result.health_tips[:4] %}
+                                    <li class="mb-2">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        {{ tip }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6><i class="fas fa-plus-circle text-success me-2"></i>Additional Recommendations</h6>
+                                <ul class="list-unstyled">
+                                    {% for tip in result.health_tips[4:8] %}
+                                    <li class="mb-2">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        {{ tip }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Diet Recommendations -->
+                        <div class="row">
+                            <div class="col-12">
+                                <h6><i class="fas fa-utensils text-primary me-2"></i>Diet Recommendations</h6>
+                                
+                                <!-- Foods to Include -->
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <div class="card bg-light border-success">
+                                            <div class="card-body">
+                                                <h6 class="text-success"><i class="fas fa-plus me-2"></i>Include in Your Diet</h6>
+                                                <ul class="list-unstyled mb-0">
+                                                    {% for food in result.diet_recommendations.general.foods_to_include[:4] %}
+                                                    <li class="mb-1">
+                                                        <i class="fas fa-leaf text-success me-2" style="font-size: 0.8rem;"></i>
+                                                        {{ food }}
+                                                    </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card bg-light border-warning">
+                                            <div class="card-body">
+                                                <h6 class="text-warning"><i class="fas fa-minus me-2"></i>Limit or Avoid</h6>
+                                                <ul class="list-unstyled mb-0">
+                                                    {% for food in result.diet_recommendations.general.foods_to_limit[:4] %}
+                                                    <li class="mb-1">
+                                                        <i class="fas fa-times text-warning me-2" style="font-size: 0.8rem;"></i>
+                                                        {{ food }}
+                                                    </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Condition-Specific Diet -->
+                                {% if result.diet_recommendations.condition_specific %}
+                                <div class="alert alert-info">
+                                    <h6 class="mb-2">Specific Recommendations for {{ result.disease_info.name }}:</h6>
+                                    <strong>Focus:</strong> {{ result.diet_recommendations.condition_specific.focus }}<br>
+                                    {% if result.diet_recommendations.condition_specific.special_foods %}
+                                    <strong>Special Foods:</strong> {{ result.diet_recommendations.condition_specific.special_foods|join(', ') }}
+                                    {% endif %}
+                                </div>
+                                {% endif %}
+
+                                <!-- Meal Planning Tips -->
+                                <div class="mt-3">
+                                    <h6><i class="fas fa-calendar-alt text-info me-2"></i>Meal Planning Tips</h6>
+                                    <div class="row">
+                                        {% for tip in result.diet_recommendations.meal_planning_tips %}
+                                        <div class="col-md-6">
+                                            <small>
+                                                <i class="fas fa-utensil-spoon text-info me-1"></i>
+                                                {{ tip }}
+                                            </small>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    {% else %}
+        <!-- No Significant Risks -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow border-0 text-center">
+                    <div class="card-body py-5">
+                        <i class="fas fa-heart text-success mb-4" style="font-size: 4rem;"></i>
+                        <h3 class="text-success mb-3">Great News!</h3>
+                        <p class="lead text-muted mb-4">
+                            Based on the information provided, your heart disease risk factors appear to be in the low range. 
+                            This is encouraging, but remember that maintaining heart health is an ongoing process.
+                        </p>
+                        
+                        <div class="alert alert-info text-start">
+                            <h6><i class="fas fa-lightbulb me-2"></i>Recommendations to Maintain Heart Health:</h6>
+                            <ul class="mb-0">
+                                <li>Continue regular physical activity and exercise</li>
+                                <li>Maintain a balanced, heart-healthy diet</li>
+                                <li>Schedule regular check-ups with your healthcare provider</li>
+                                <li>Monitor blood pressure and cholesterol levels</li>
+                                <li>Avoid smoking and limit alcohol consumption</li>
+                                <li>Manage stress through healthy coping strategies</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Action Buttons -->
+    <div class="row justify-content-center mt-5 mb-5">
+        <div class="col-lg-8 text-center">
+            <a href="{{ url_for('input_form') }}" class="btn btn-outline-primary btn-lg me-3">
+                <i class="fas fa-redo me-2"></i>
+                Take Assessment Again
+            </a>
+            <a href="{{ url_for('landing') }}" class="btn btn-medical-primary btn-lg">
+                <i class="fas fa-home me-2"></i>
+                Return to Home
+            </a>
+        </div>
+    </div>
+
+    <!-- Medical Disclaimer -->
+    <div class="row justify-content-center mt-4">
+        <div class="col-lg-10">
+            <div class="alert alert-warning border-warning">
+                <h6><i class="fas fa-exclamation-triangle me-2"></i>Important Medical Disclaimer</h6>
+                <p class="mb-0 small">
+                    This assessment is for informational and educational purposes only and should not be considered as medical advice, diagnosis, or treatment recommendation. 
+                    The results are based on statistical models and may not account for all individual health factors. 
+                    Always consult with qualified healthcare professionals for proper medical evaluation, diagnosis, and treatment decisions. 
+                    Do not use this tool to replace regular medical care or delay seeking professional medical attention.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,441 @@
+/* Medical Theme Variables */
+:root {
+    --medical-primary: hsl(208, 56%, 30%);      /* Deep medical blue */
+    --medical-secondary: hsl(184, 58%, 45%);    /* Teal accent */
+    --medical-success: hsl(123, 43%, 42%);      /* Medical green */
+    --medical-warning: hsl(45, 100%, 51%);      /* Warning amber */
+    --medical-danger: hsl(354, 70%, 54%);       /* Medical red */
+    --medical-light: hsl(210, 17%, 95%);        /* Light gray */
+    --medical-dark: hsl(210, 11%, 15%);         /* Dark navy */
+    --background: hsl(210, 11%, 98%);           /* Off-white background */
+    --text-primary: hsl(210, 11%, 15%);         /* Primary text */
+    --text-secondary: hsl(210, 7%, 56%);        /* Secondary text */
+    --border-color: hsl(210, 14%, 89%);         /* Light border */
+}
+
+/* Global Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* Custom Background Classes */
+.bg-medical-primary {
+    background-color: var(--medical-primary) !important;
+}
+
+.bg-medical-secondary {
+    background-color: var(--medical-secondary) !important;
+}
+
+.bg-medical-dark {
+    background-color: var(--medical-dark) !important;
+}
+
+.bg-medical-light {
+    background-color: var(--medical-light) !important;
+}
+
+/* Custom Text Colors */
+.text-medical-primary {
+    color: var(--medical-primary) !important;
+}
+
+.text-medical-secondary {
+    color: var(--medical-secondary) !important;
+}
+
+/* Custom Button Styles */
+.btn-medical-primary {
+    background-color: var(--medical-primary);
+    border-color: var(--medical-primary);
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-medical-primary:hover {
+    background-color: hsl(208, 56%, 25%);
+    border-color: hsl(208, 56%, 25%);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 89, 149, 0.3);
+}
+
+.btn-medical-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(52, 89, 149, 0.25);
+}
+
+/* Navigation Styles */
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--medical-secondary) !important;
+}
+
+/* Landing Page Styles */
+.landing-main {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--background) 0%, var(--medical-light) 100%);
+}
+
+.hero-section {
+    padding-top: 80px;
+}
+
+.hero-content h1 {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.feature-item {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.feature-icon {
+    width: 50px;
+    height: 50px;
+    background-color: var(--medical-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.hero-image {
+    position: relative;
+}
+
+.medical-illustration {
+    position: relative;
+    display: inline-block;
+}
+
+.pulse-animation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    border: 2px solid var(--medical-danger);
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.95);
+        opacity: 1;
+    }
+    70% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.05);
+        opacity: 0;
+    }
+}
+
+/* Statistics Section */
+.stats-section {
+    background-color: var(--medical-light);
+}
+
+.stat-card {
+    padding: 2rem 1rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--medical-primary);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Form Styles */
+.form-main {
+    background-color: var(--background);
+    min-height: 100vh;
+}
+
+.card {
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.card-header {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.form-control, .form-select {
+    border-radius: 0.5rem;
+    border: 2px solid var(--border-color);
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--medical-primary);
+    box-shadow: 0 0 0 0.2rem rgba(52, 89, 149, 0.15);
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.form-range {
+    margin: 1rem 0;
+}
+
+.form-range::-webkit-slider-thumb {
+    background-color: var(--medical-primary);
+}
+
+.form-range::-moz-range-thumb {
+    background-color: var(--medical-primary);
+    border: none;
+}
+
+/* Progress Bar */
+.progress {
+    background-color: var(--medical-light);
+    border-radius: 1rem;
+}
+
+.progress-bar {
+    border-radius: 1rem;
+    transition: width 0.5s ease;
+}
+
+/* Results Page Styles */
+.results-main {
+    background-color: var(--background);
+    min-height: 100vh;
+}
+
+.badge-risk-high {
+    background-color: var(--medical-danger);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.badge-risk-moderate {
+    background-color: var(--medical-warning);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.badge-risk-low {
+    background-color: var(--medical-success);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
+/* Alert Customizations */
+.alert {
+    border-radius: 0.75rem;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.alert-info {
+    background-color: hsl(208, 100%, 97%);
+    color: var(--medical-primary);
+    border-left: 4px solid var(--medical-primary);
+}
+
+.alert-warning {
+    background-color: hsl(45, 100%, 96%);
+    color: hsl(45, 100%, 30%);
+    border-left: 4px solid var(--medical-warning);
+}
+
+.alert-success {
+    background-color: hsl(123, 43%, 96%);
+    color: hsl(123, 43%, 25%);
+    border-left: 4px solid var(--medical-success);
+}
+
+/* Card Customizations */
+.border-success {
+    border-color: var(--medical-success) !important;
+}
+
+.border-warning {
+    border-color: var(--medical-warning) !important;
+}
+
+.border-info {
+    border-color: var(--medical-primary) !important;
+}
+
+/* List Styles */
+.list-unstyled li {
+    padding: 0.25rem 0;
+}
+
+/* Footer Styles */
+footer {
+    margin-top: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .stat-card {
+        margin-bottom: 2rem;
+    }
+    
+    .feature-item {
+        margin-bottom: 1rem;
+    }
+    
+    .btn-medical-primary {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-content {
+        text-align: center;
+    }
+    
+    .cta-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .cta-buttons .btn {
+        width: 100%;
+    }
+    
+    .stats-section .container {
+        padding: 0 1rem;
+    }
+    
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .navbar, .btn, footer {
+        display: none !important;
+    }
+    
+    .card {
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+    }
+    
+    .alert {
+        border: 1px solid #000 !important;
+        background-color: white !important;
+        color: black !important;
+    }
+}
+
+/* Animation Utilities */
+.fade-in {
+    animation: fadeIn 0.6s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Accessibility Improvements */
+.btn:focus,
+.form-control:focus,
+.form-select:focus {
+    outline: 2px solid var(--medical-primary);
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --medical-primary: hsl(208, 100%, 20%);
+        --text-primary: hsl(0, 0%, 0%);
+        --background: hsl(0, 0%, 100%);
+        --border-color: hsl(0, 0%, 50%);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .pulse-animation {
+        animation: none;
+    }
+}

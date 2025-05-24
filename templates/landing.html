@@ -68,8 +68,23 @@
             <div class="col-lg-6">
                 <div class="hero-image text-center">
                     <div class="medical-illustration">
-                        <i class="fas fa-heart text-danger" style="font-size: 15rem; opacity: 0.1;"></i>
+                        <img src="{{ url_for('static', filename='images/heart-icon.svg') }}" 
+                             alt="Animated Heart with Pulse" 
+                             class="img-fluid heart-main-image"
+                             style="max-width: 350px; height: auto;">
                         <div class="pulse-animation"></div>
+                    </div>
+                    
+                    <!-- Additional decorative hearts -->
+                    <div class="floating-hearts">
+                        <img src="{{ url_for('static', filename='images/heart-health.svg') }}" 
+                             alt="Healthy Heart" 
+                             class="floating-heart heart-1"
+                             style="width: 80px; height: auto;">
+                        <img src="{{ url_for('static', filename='images/heart-medical.svg') }}" 
+                             alt="Medical Heart" 
+                             class="floating-heart heart-2"
+                             style="width: 90px; height: auto;">
                     </div>
                 </div>
             </div>

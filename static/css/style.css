@@ -1,22 +1,23 @@
-/* Medical Theme Variables */
+/* Medical Theme Variables (Purple + Light Pink) */
 :root {
-    --medical-primary: hsl(208, 56%, 30%);      /* Deep medical blue */
-    --medical-secondary: hsl(184, 58%, 45%);    /* Teal accent */
-    --medical-success: hsl(123, 43%, 42%);      /* Medical green */
-    --medical-warning: hsl(45, 100%, 51%);      /* Warning amber */
-    --medical-danger: hsl(354, 70%, 54%);       /* Medical red */
-    --medical-light: hsl(210, 17%, 95%);        /* Light gray */
-    --medical-dark: hsl(210, 11%, 15%);         /* Dark navy */
-    --background: hsl(210, 11%, 98%);           /* Off-white background */
-    --text-primary: hsl(210, 11%, 15%);         /* Primary text */
-    --text-secondary: hsl(210, 7%, 56%);        /* Secondary text */
-    --border-color: hsl(210, 14%, 89%);         /* Light border */
+    --medical-primary: hsl(270, 70%, 40%);   /* Purple */
+    --medical-secondary: hsl(290, 65%, 45%); /* Lighter purple accent */
+    --medical-success: hsl(123, 43%, 42%);   /* Medical green */
+    --medical-warning: hsl(45, 100%, 51%);   /* Warning amber */
+    --medical-danger: hsl(354, 70%, 54%);    /* Medical red */
+    --medical-light: hsl(210, 17%, 95%);     /* Light gray */
+    --medical-dark: hsl(210, 11%, 15%);      /* Dark navy */
+    --background: hsl(340, 100%, 97%);       /* 🌸 Light Pink background */
+    --text-primary: hsl(210, 11%, 15%);      /* Primary text */
+    --text-secondary: hsl(210, 7%, 56%);     /* Secondary text */
+    --border-color: hsl(210, 14%, 89%);      /* Light border */
+     /* --gray-700: hsl(210, 10%, 23%);          Footer gray */
 }
 
 /* Global Styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--background);
+    background-color: var(--background);  /* Light pink applied */
     color: var(--text-primary);
     line-height: 1.6;
 }
@@ -59,27 +60,33 @@ body {
 }
 
 .btn-medical-primary:hover {
-    background-color: hsl(208, 56%, 25%);
-    border-color: hsl(208, 56%, 25%);
+    background-color: hsl(270, 70%, 35%); /* Darker purple */
+    border-color: hsl(270, 70%, 35%);
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(52, 89, 149, 0.3);
+    box-shadow: 0 4px 12px rgba(128, 0, 128, 0.3);
 }
 
 .btn-medical-primary:focus {
-    box-shadow: 0 0 0 0.2rem rgba(52, 89, 149, 0.25);
+    box-shadow: 0 0 0 0.2rem rgba(128, 0, 128, 0.25);
 }
 
 /* Navigation Styles */
+.navbar {
+    background-color: var(--medical-primary) !important;
+}
+
 .navbar-brand {
     font-weight: 700;
     font-size: 1.5rem;
+    color: white !important;
 }
 
 .navbar-nav .nav-link {
     font-weight: 500;
     padding: 0.5rem 1rem !important;
     transition: color 0.3s ease;
+    color: white !important;
 }
 
 .navbar-nav .nav-link:hover {
@@ -219,7 +226,7 @@ body {
 
 .form-control:focus, .form-select:focus {
     border-color: var(--medical-primary);
-    box-shadow: 0 0 0 0.2rem rgba(52, 89, 149, 0.15);
+    box-shadow: 0 0 0 0.2rem rgba(128, 0, 128, 0.15);
 }
 
 .form-label {
@@ -260,7 +267,7 @@ body {
 
 .badge-risk-high {
     background-color: var(--medical-danger);
-    color: white;
+    color: rgb(255, 255, 255);
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
 }
@@ -323,9 +330,26 @@ body {
 }
 
 /* Footer Styles */
-footer {
-    margin-top: auto;
+/* ===============================
+   Footer
+   =============================== */
+.footer {
+    background-color: hsl(210, 10%, 23%);  /* gray-700 */
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
 }
+
+.footer a {
+    color: var(--medical-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: white;
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -420,7 +444,7 @@ footer {
 /* High contrast mode support */
 @media (prefers-contrast: high) {
     :root {
-        --medical-primary: hsl(208, 100%, 20%);
+        --medical-primary: hsl(270, 100%, 25%);
         --text-primary: hsl(0, 0%, 0%);
         --background: hsl(0, 0%, 100%);
         --border-color: hsl(0, 0%, 50%);
@@ -499,6 +523,7 @@ footer {
 .anatomical-heart {
     transition: all 0.3s ease;
     filter: drop-shadow(0 5px 15px rgba(139, 74, 107, 0.3));
+    animation: heartbeat 3s ease-in-out infinite;
 }
 
 .anatomical-heart:hover {
@@ -540,10 +565,6 @@ footer {
     50% {
         transform: scale(1.02);
     }
-}
-
-.anatomical-heart {
-    animation: heartbeat 3s ease-in-out infinite;
 }
 
 /* Responsive adjustments for heart images */
